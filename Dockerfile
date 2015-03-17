@@ -1,7 +1,7 @@
 FROM phusion/baseimage:latest
 MAINTAINER Hussein Galal hussein.galal.ahmed.11@gmail.com
 
-ADD scripts/run.sh /etc/my_init.d/99_add_user.sh
+ADD scripts/run.sh /etc/my_init.d/99_automatic_cluster
 
 RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
 RUN apt-get update -qq && apt-get install -y software-properties-common && \
@@ -25,7 +25,7 @@ RUN sed -i.bak 's/listener.http.internal = 127.0.0.1/listener.http.internal = 0.
     echo "javascript.hook_pool_size = 0" >> /etc/riak/riak.conf
 
 
-RUN chmod u+x /etc/my_init.d/99_add_user.sh
+RUN chmod u+x /etc/my_init.d/99_automatic_cluster
 RUN chmod u+x /etc/service/riak/run
 
 RUN rm -f /etc/service/sshd/down
