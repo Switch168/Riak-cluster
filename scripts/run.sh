@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sleep 10
 if env | grep -q "RIAK_JOINING_IP"; then
   # Join node to the cluster
   (sleep 5;riak-admin cluster join "riak@${RIAK_JOINING_IP}" > /dev/null 2>&1 && echo -e "Node Joined The Cluster") &
