@@ -28,9 +28,8 @@ ADD scripts/run.sh /etc/my_init.d/99_automatic_cluster.sh
 RUN chmod u+x /etc/my_init.d/99_automatic_cluster.sh
 RUN chmod u+x /etc/service/riak/run
 
-# Enable SSH Login
-RUN rm -f /etc/service/sshd/down
-RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
+# Enable insecure SSH key
+RUN /usr/sbin/enable_insecure_key
 
 EXPOSE 22 8098 8087
 
