@@ -16,12 +16,13 @@ RUN apt-get install -y riak
 RUN mkdir -p /etc/service/riak
 ADD scripts/riak.sh /etc/service/riak/run
 
-RUN sed -i.bak 's/listener.http.internal = 127.0.0.1/listener.http.internal = 0.0.0.0/' /etc/riak/riak.conf && \
-    sed -i.bak 's/listener.protobuf.internal = 127.0.0.1/listener.protobuf.internal = 0.0.0.0/' /etc/riak/riak.conf && \
+RUN sed -i.bak 's/listener.http.internal = 127.0.0.1/listener.http.internal = 0.0.0.0/' /etc/riak/riak.conf && sed -i.bak 's/listener.protobuf.internal = 127.0.0.1/listener.protobuf.internal = 0.0.0.0/' /etc/riak/riak.conf && \
     echo "anti_entropy.concurrency_limit = 1" >> /etc/riak/riak.conf && \
     echo "javascript.map_pool_size = 0" >> /etc/riak/riak.conf && \
-    echo "javascript.reduce_pool_size = 0" >> /etc/riak/riak.conf && \
-    echo "javascript.hook_pool_size = 0" >> /etc/riak/riak.conf
+    echo "javascript.reduce_pool_size = 0" >> /etc/riak/riak.conf && \ 
+    echo "javascript.hook_pool_size = 0" >> /etc/riak/riak.conf && \ 
+    echo "riak_control = on" >> /etc/riak/riak.conf && \ 
+    echo "storage_backend = leveldb" >> /etc/riak/riak.conf
 
 # Add Automatic cluster support
 ADD scripts/run.sh /etc/my_init.d/99_automatic_cluster.sh
